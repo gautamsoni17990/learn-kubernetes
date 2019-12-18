@@ -170,10 +170,12 @@ OK, enought talk! Lets initialize kubeadm!
 ```
 kubeadm init \
   --pod-network-cidr "10.200.0.0/16" \
-  --service-cidr "10.32.0.0/16"
+  --service-cidr "10.32.0.0/16" \
+  --apiserver-advertise-address "10.244.0.0/16"
 ```
 
 **Note:** You can skip `--pod-network-cidr` and `--service-cidr` . The default for pod-network is nothing- actually depends on the CNI plugin you will be using; but if you plan to use flannel, **and** want to use flannels *default configuration*, then you must pass `--pod-network-cidr "10.244.0.0/16"` to the `kubeadm init` command . The default for `--service-cidr` is: `10.96.0.0/12`. 
+One more important thing that we should keep in our mind is we need to mention the apiserver-advertise-address otherwise we will get lot of difficulties during the worker node join.
 
 
 
